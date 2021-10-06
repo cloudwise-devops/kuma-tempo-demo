@@ -13,6 +13,8 @@ data:
       zipkin:
         endpoint: 0.0.0.0:9411
     exporters:
+      logging:
+        loglevel: debug
       otlp:
         endpoint: tempo.tracing.svc.cluster.local:55680
         insecure: true

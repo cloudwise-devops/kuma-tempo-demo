@@ -1,15 +1,9 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: bookinfo
-  annotations:
-    kuma.io/sidecar-injection: enabled
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: details
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: details
     service: details
@@ -27,7 +21,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: bookinfo-details
-  namespace: bookinfo
+  namespace: bookinfo1
 
   labels:
     account: details
@@ -36,7 +30,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: details-v1
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: details
     version: v1
@@ -69,7 +63,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ratings
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: ratings
     service: ratings
@@ -87,7 +81,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: bookinfo-ratings
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     account: ratings
 ---
@@ -95,7 +89,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ratings-v1
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: ratings
     version: v1
@@ -128,7 +122,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: reviews
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: reviews
     service: reviews
@@ -146,7 +140,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: bookinfo-reviews
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     account: reviews
 ---
@@ -154,7 +148,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-v1
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: reviews
     version: v1
@@ -197,7 +191,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-v2
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: reviews
     version: v2
@@ -240,7 +234,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-v3
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: reviews
     version: v3
@@ -286,14 +280,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: productpage
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: productpage
     service: productpage
   annotations:
     9080.service.kuma.io/protocol: http
     ingress.kubernetes.io/service-upstream: "true"
-
 spec:
   ports:
     - port: 9080
@@ -305,7 +298,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: bookinfo-productpage
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     account: productpage
 ---
@@ -313,7 +306,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: productpage-v1
-  namespace: bookinfo
+  namespace: bookinfo1
   labels:
     app: productpage
     version: v1
@@ -345,3 +338,22 @@ spec:
         - name: tmp
           emptyDir: {}
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  namespace: bookinfo1
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: 'true'
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: productpage
+                port:
+                  number: 9080

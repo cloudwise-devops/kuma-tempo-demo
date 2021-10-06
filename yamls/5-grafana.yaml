@@ -15,13 +15,13 @@ datasources:
         access: browser
         orgId: 1
         uid: loki
-        url: http://loki.tracing.svc:3100
+        url: http://loki.kuma-logging.svc:3100
         isDefault: false
         editable: true
         jsonData:
           derivedFields:
             - datasourceName: Tempo
-              matcherRegex: "traceID=(\\w+)"
+              matcherRegex: "TraceId: (\w+)"
               name: TraceID
               url: "$${__value.raw}"
               datasourceUid: tempo

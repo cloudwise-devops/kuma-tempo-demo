@@ -14,3 +14,25 @@ helm install loki grafana/loki-stack --version 2.4.1 -n tracing -f yamls/2-loki.
 
 
 kubectl apply -n tracing -f https://raw.githubusercontent.com/antonioberben/examples/master/opentelemetry-collector/otel.yaml
+
+
+
+kubectl apply -f https://bit.ly/k4k8s 
+kubectl annotate ns kong kuma.io/sidecar-injection=enabled
+kubectl delete pod --all -n kong  
+
+
+{namespace="bookinfo1"} |="TraceId"
+
+
+~/code/cwise/kuma-1.3.0/bin/kumactl install logging | kubectl apply -f -
+
+
+1. install kuma
+2. install kong
+3. install tempo
+4. install loki
+5. install grafana
+6. oltp
+7. run kuma collectors
+8. install application
