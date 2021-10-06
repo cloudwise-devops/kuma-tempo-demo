@@ -1,0 +1,33 @@
+.log
+*.log
+.checkstyle
+*.*~
+*.retry
+*.cache
+*.hprof
+
+generated/
+generated-wsdl/
+out/
+classes/
+
+# gradle
+.gradle
+build/
+dist/
+target/
+
+# idea
+*.iml
+*.ipr
+*.iws
+.idea/
+.ideaDataSources
+dataSources
+
+node_modules/
+dist/
+# Exclude file folder used to build docker containers
+dist-front-app/
+dist-front-pub/
+.DS_Store
