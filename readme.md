@@ -82,3 +82,9 @@ Searching in loki:
 ```
 {namespace="bookinfo"} |="TraceId"
 ```
+
+Screens:
+Overview from loggin side
+![screen1](screen-1.png)
+From Tempo side
+![screen2](screen-2.png)
