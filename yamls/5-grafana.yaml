@@ -23,7 +23,7 @@ datasources:
             - datasourceName: Tempo
               matcherRegex: "TraceId: (\w+)"
               name: TraceID
-              url: "$${__value.raw}"
+              url: "${__value.raw}"
               datasourceUid: tempo
 
 env:
