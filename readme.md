@@ -23,7 +23,7 @@ kubectl apply -f yamls/0-tracing.yaml
 ```
 2. Install Grafana
 ```
-helm install tempo grafana/tempo --version 0.7.4 -n tracing -f  yamls/5-grafana.yaml
+helm install grafana grafana/grafana -n tracing --version 6.13.5  -f yamls/5-grafana.yaml
 ```
 3. Install Tempo
 ```
@@ -32,7 +32,7 @@ helm install tempo grafana/tempo --version 0.7.4 -n tracing -f  yamls/1-tempo.ya
 
 5. Install Open Telemetry Collector
 ```
-kubetl apply -f yamls/3-otel.yaml
+kubectl apply -f yamls/3-otel.yaml
 ```
 ## Kuma Install
 0. Get binary
@@ -50,7 +50,7 @@ kumactl install logging | kubectl apply -f -
 ```
 3. Enable collectors
 ```
-kubetl apply -f yamls/6-kuma-collector.yaml
+kubectl apply -f yamls/6-kuma-collector.yaml
 ```
 
 ## App Install

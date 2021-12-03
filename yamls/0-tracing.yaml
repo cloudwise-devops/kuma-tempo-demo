@@ -4,4 +4,4 @@ kind: Namespace
 metadata:
   name: tracing
   annotations:
-    kuma.io/sidecar-injection: false
+    kuma.io/sidecar-injection: "false"
