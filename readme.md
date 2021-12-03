@@ -1,6 +1,21 @@
+# Purpose
+Cloud Native approach have solved many single units of complexities, but it have created tools sprawl within for teams. This demo show how to implement single pane of glass for observability tools based on Kuma envoy based service mesh (https://kuma.io/)
+
+Components
+
+| Component 	| Purpose 	|   
+|-----------	|-----
+| Kuma          | Envoy based service mesh |
+| Loki          | Centralized logging service |
+| Grafana       | Dashboards| 
+| Tempo         | Traces storage solution |
+
+
+ 
+![how_it_works](kuma-how-it-works.png)
+ 
 # HOW TO INSTALL
 ## General Overview
-![how_it_works](kuma-how-it-works.png)
 ## Infra Setup
 All is being deployed on GKE for sake of simplicity
 ```
